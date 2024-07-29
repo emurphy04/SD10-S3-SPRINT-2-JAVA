@@ -54,6 +54,6 @@ public class Items {
 
     @Override
     public String toString() {
-        return "";
+        return "Item: "+itemName+" | Category: "+itemCat+" | Price: "+itemPrice+" | SKU: "+itemSku+"\nDescription: "+itemDesc+"\n";
     }
 }

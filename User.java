@@ -14,8 +14,14 @@ public abstract class User {
         this.email = email;
     }
 
-    public ArrayList<Items> getCart() {
-        return cart;
+    public void addToCart(Items item){
+        cart.add(item);
+    }
+
+    public void getCart() {
+        for (int i = 0; i<cart.size(); i++){
+            System.out.println(cart.get(i).toString());
+        }
     }
 
     public String getEmail() {
