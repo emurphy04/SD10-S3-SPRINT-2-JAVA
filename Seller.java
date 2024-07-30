@@ -1,7 +1,9 @@
 public class Seller extends User{
+    String role;
 
     public Seller(String username, String password, String email) {
         super(username, password, email);
+        this.role = "seller";
     }
 
     @Override

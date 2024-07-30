@@ -1,13 +1,13 @@
 public class Admin extends User{
-    String adminKey;
+    String role;
 
-    public Admin(String username, String password, String email, String adminKey) {
+    public Admin(String username, String password, String email) {
         super(username, password, email);
-        this.adminKey = adminKey;
+        this.role = "admin";
     }
 
     @Override
     public String toString() {
-        return "User: "+username+" | email: "+email+" | Role: Admin | Admin Key: "+adminKey;
+        return "User: "+username+" | email: "+email+" | Role: Admin";
     }
 }

@@ -3,11 +3,20 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class UserService {
     public static void main(String[] args) {
 
+        String userRole = "buyer";
+
         ArrayList<Items> Products = new ArrayList<Items>();
+
+        ArrayList<User> users = new ArrayList<User>();
+
+        Scanner scanner = new Scanner(System.in);
+
+        //JDBC code
 
         try {
             Class.forName("org.postgresql.Driver");
@@ -33,27 +42,66 @@ public class UserService {
 
             System.out.println(Products.get(1));
 
-
-
-            //make one of these for each value in the table and have it loop for each row, then in the loop create the
-            //items objects with those values and add them to an array list, the array list is goated
-
-
-
         } catch (Exception e) {
             System.out.println("Unable to establish a connection - "+e);
         }
 
+        //LOGIN/REGISTER
 
-        Buyer buyer1 = new Buyer("Ethan", "deadpool1", "ethanmurphy267@gmail.com");
-        Items c01 = new Items("CPU Fan", "c01", 12.99, "A fan for cooling", "Cooling");
+        System.out.println("Please login or sign up.");
+        System.out.println("1. Login");
+        System.out.println("2. Sign Up");
+        System.out.println("");
+        String choice = scanner.nextLine();
+
+        switch (choice) {
+            case "1":
+                //login
+                try {
+                    Class.forName("org.postgresql.Driver");
         
-        buyer1.getCart();
+                    String sql = "select * from users";
+                    String url = "jdbc:postgresql://localhost:5432/Java";
+                    String username = "postgres";
+                    String password = "admin";
+        
+                    Connection connection = DriverManager.getConnection(url, username, password);
+                    Statement statement = connection.createStatement();
+                    ResultSet rs = statement.executeQuery(sql);
+        
+                    while (rs.next()){
+                        String user = rs.getString(1);
+                        String pass = rs.getString(2);
+                        String email = rs.getString(3);
+                        String role = rs.getString(4);
+        
+                        if (role.equals("admin")){
+                            users.add(new Admin(user, pass, email));
+                        } else if(role.equals("buyer")){
+                            users.add(new Buyer(user, pass, email));
+                        } else if(role.equals("seller")){
+                            users.add(new Seller(user, pass, email));
+                        }
+                        
+                    }
+        
+        
+                } catch (Exception e) {
+                    System.out.println("Unable to establish a connection - "+e);
+                }
 
-        buyer1.addToCart(c01);
+                break;
 
-        buyer1.addToCart(Products.get(0));
+            case "2":
+                //sign up
+                break;
+        
+            default:
+                System.out.println("Invalid Choice, Please try again.");
+                break;
+        }
 
-        buyer1.getCart();
+        //CLI
     }
+
 }
