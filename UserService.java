@@ -10,6 +10,10 @@ public class UserService {
 
         String userRole = "buyer";
 
+        int userIndex = 0;
+
+        boolean isLogged = false;
+
         ArrayList<Items> Products = new ArrayList<Items>();
 
         ArrayList<User> users = new ArrayList<User>();
@@ -54,54 +58,92 @@ public class UserService {
         System.out.println("");
         String choice = scanner.nextLine();
 
-        switch (choice) {
-            case "1":
-                //login
-                try {
-                    Class.forName("org.postgresql.Driver");
-        
-                    String sql = "select * from users";
-                    String url = "jdbc:postgresql://localhost:5432/Java";
-                    String username = "postgres";
-                    String password = "admin";
-        
-                    Connection connection = DriverManager.getConnection(url, username, password);
-                    Statement statement = connection.createStatement();
-                    ResultSet rs = statement.executeQuery(sql);
-        
-                    while (rs.next()){
-                        String user = rs.getString(1);
-                        String pass = rs.getString(2);
-                        String email = rs.getString(3);
-                        String role = rs.getString(4);
-        
-                        if (role.equals("admin")){
-                            users.add(new Admin(user, pass, email));
-                        } else if(role.equals("buyer")){
-                            users.add(new Buyer(user, pass, email));
-                        } else if(role.equals("seller")){
-                            users.add(new Seller(user, pass, email));
+
+        while(isLogged == false){
+            switch (choice) {
+                case "1":
+                    //login
+                    try {
+                        Class.forName("org.postgresql.Driver");
+            
+                        String sql = "select * from users";
+                        String url = "jdbc:postgresql://localhost:5432/Java";
+                        String username = "postgres";
+                        String password = "admin";
+            
+                        Connection connection = DriverManager.getConnection(url, username, password);
+                        Statement statement = connection.createStatement();
+                        ResultSet rs = statement.executeQuery(sql);
+            
+                        while (rs.next()){
+                            String user = rs.getString(1);
+                            String pass = rs.getString(2);
+                            String email = rs.getString(3);
+                            String role = rs.getString(4);
+
+                            switch (role) {
+                                case "admin" -> users.add(new Admin(user, pass, email));
+                                case "buyer" -> users.add(new Buyer(user, pass, email));
+                                case "seller" -> users.add(new Seller(user, pass, email));
+                            }
+                            
+                        }
+            
+            
+                    } catch (Exception e) {
+                        System.out.println("Unable to establish a connection - "+e);
+                    }
+
+                    System.out.println("Enter your username: ");
+                    String userUsername = scanner.nextLine();
+                    System.out.println("Enter your password: ");
+                    String userPassword = scanner.nextLine();
+
+                    for(int i = 0; i<users.size(); i++){
+                        if (userUsername.equals(users.get(i).username)){
+                            if (userPassword.equals(users.get(i).password)){
+                                isLogged = true;
+                                userIndex = i;
+                            }
                         }
                         
                     }
-        
-        
-                } catch (Exception e) {
-                    System.out.println("Unable to establish a connection - "+e);
-                }
 
-                break;
+                    if (isLogged == false){
+                        System.out.println("Username or password is incorrect.");
+                        System.out.println();
+                    }
 
-            case "2":
-                //sign up
-                break;
-        
-            default:
-                System.out.println("Invalid Choice, Please try again.");
-                break;
+                    break;
+
+                case "2":
+                    //sign up
+                    break;
+            
+                default:
+                    System.out.println("Invalid Choice, Please try again.");
+                    break;
+            }
         }
 
         //CLI
-    }
 
+        switch (users.get(userIndex).role) {
+            case "admin":
+                
+                break;
+
+            case "buyer":
+                
+                break;
+
+            case "seller":
+                
+                break;
+        
+            default:
+                break;
+        }
+
+    }
 }
