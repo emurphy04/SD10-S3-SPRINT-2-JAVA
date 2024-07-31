@@ -7,6 +7,12 @@ public class Buyer extends User{
     }
 
     @Override
+    public String getRole() {
+        // TODO Auto-generated method stub
+        return this.role;
+    }
+
+    @Override
     public String toString() {
         return "User: "+username+" | email: "+email+" | Role: Buyer";
     }

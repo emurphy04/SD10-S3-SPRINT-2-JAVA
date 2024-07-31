@@ -13,7 +13,6 @@ public abstract class User {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.role = "undefined";
     }
 
     public String getRole() {
