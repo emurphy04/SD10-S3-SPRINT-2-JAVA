@@ -4,6 +4,7 @@ public abstract class User {
     String username;
     String password;
     String email;
+    String role;
 
     ArrayList<Items> cart = new ArrayList<Items>();
 
@@ -12,6 +13,14 @@ public abstract class User {
         this.username = username;
         this.password = password;
         this.email = email;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public void addToCart(Items item){
