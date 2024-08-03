@@ -4,13 +4,15 @@ public class Items {
     double itemPrice;
     String itemDesc;
     String itemCat;
+    String userListed;
 
-    public Items(String itemName, String itemSku, double itemPrice, String itemDesc, String itemCat){
+    public Items(String itemName, String itemSku, double itemPrice, String itemDesc, String itemCat, String userListed){
         this.itemName = itemName;
         this.itemSku = itemSku;
         this.itemPrice = itemPrice;
         this.itemDesc = itemDesc;
         this.itemCat = itemCat;
+        this.userListed = userListed;
     }
 
     public String getItemCat() {
@@ -54,6 +56,6 @@ public class Items {
 
     @Override
     public String toString() {
-        return "Item: "+itemName+" | Category: "+itemCat+" | Price: "+itemPrice+" | SKU: "+itemSku+"\nDescription: "+itemDesc+"\n";
+        return "Item: "+itemName+" | Category: "+itemCat+" | Price: "+itemPrice+" | SKU: "+itemSku+"| Listed by: "+userListed+"\nDescription: "+itemDesc;
     }
 }

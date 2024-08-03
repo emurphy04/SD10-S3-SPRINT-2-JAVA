@@ -6,8 +6,20 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.sound.sampled.Port;
+
+
 public class UserService {
+
+    public void addItem(){
+
+    }
+
+
+
     public static void main(String[] args) {
+
+        
 
         String role = "buyer";
 
@@ -41,8 +53,9 @@ public class UserService {
                 double itemPrice = rs.getDouble(3);
                 String itemDesc = rs.getString(4);
                 String itemCat = rs.getString(5);
+                String userListed = rs.getString(6);
 
-                Products.add(new Items(itemName, itemSku, itemPrice, itemDesc, itemCat));
+                Products.add(new Items(itemName, itemSku, itemPrice, itemDesc, itemCat, userListed));
             }
 
             System.out.println(Products.get(1));
@@ -179,25 +192,131 @@ public class UserService {
         }
 
         //CLI
-        System.out.println(users.get(userIndex).getRole());
-        switch (users.get(userIndex).getRole()) {
-            case "admin":
-                System.out.println("admin");
-                //make admin stuff now
-                break;
+        boolean signout = false;
+        while(signout == false){
+            switch (users.get(userIndex).getRole()) {
+                case "admin":
+                    //make admin stuff now
 
-            case "buyer":
-                System.out.println("buyer");
-                //made buyer stuff now
-                break;
+                    System.out.println("Admin Interface: ");
+                    System.out.println("================");
+                    System.out.println();
+                    System.out.println("1. List all Users");
+                    System.out.println("2. Delete user");
+                    System.out.println("3. List all products");
+                    System.out.println("4. Sign Out");
+                    System.out.println();
+                    System.out.println("Please enter your choice: ");
+                    String choice2 = scanner.nextLine();
 
-            case "seller":
-                System.out.println("seller");
-                //make seller stuff now
-                break;
-        
-            default:
-                break;
+                    switch (choice2) {
+                        case "1":
+                            System.out.println("---------------------------------------------------------------------------");
+                            for(int i = 0; i<users.size(); i++){
+                                System.out.println(users.get(i));
+                                System.out.println("---------------------------------------------------------------------------");
+                            }
+                            break;
+                        case "2":
+                            System.out.println("---------------------------------------------------------------------------");
+                            for(int i = 0; i<users.size(); i++){
+                                System.out.println(users.get(i));
+                                System.out.println("---------------------------------------------------------------------------");
+                            }
+                            System.out.println("Please enter the username of the user to be deleted: ");
+                            String delUser = scanner.nextLine();
+                            if(!(users.get(userIndex).username.equals(delUser))){
+                                for(int i = 0; i<users.size(); i++){
+                                    if(users.get(i).username.equals(delUser)){
+                                        System.out.println("Are you sure you want to delete this user? Y/N");
+                                        String choice3 = scanner.nextLine().toUpperCase();
+                                        if (choice3.equals("Y")) {
+                                            users.remove(i);
+                                            try {
+                                                Class.forName("org.postgresql.Driver");
+                                    
+                                                String url = "jdbc:postgresql://localhost:5432/Java";
+                                                String username = "postgres";
+                                                String password = "admin";
+                                    
+                                                Connection connection = DriverManager.getConnection(url, username, password);
+                        
+                                                PreparedStatement st = connection.prepareStatement("DELETE FROM users WHERE username=?");
+                                                st.setString(1, delUser);
+                                                st.executeUpdate();
+                                                st.close();
+                                    
+                                            } catch (Exception e) {
+                                                System.out.println("Unable to establish a connection - "+e);
+                                            }
+                                        } else {
+                                            System.err.println("Delete cancelled.");
+                                            break;
+                                        }
+
+                                        break;
+                                    }
+                                }
+                            } else {
+                                System.err.println("Cannot delete current user.");
+                            }
+                            break;
+                        case "3":
+                            System.out.println("---------------------------------------------------------------------------");
+                            for(int i = 0; i<Products.size(); i++){
+                                System.out.println(Products.get(i));
+                                System.out.println("---------------------------------------------------------------------------");
+                            }
+                            break;
+                        case "4":
+                            System.out.println("Exiting...");
+                            signout = true;
+                            break;
+                    
+                        default:
+                            break;
+                    }
+
+                    break;
+
+                case "buyer":
+                    System.out.println("buyer");
+                    //made buyer stuff now
+
+                    System.out.println("Customer Interface: ");
+                    System.out.println("================");
+                    System.out.println();
+                    System.out.println("1. Browse all products");
+                    System.out.println("2. Search for product");
+                    System.out.println("3. Add to cart");
+                    System.out.println("4. Sign Out");
+                    System.out.println();
+                    System.out.println("Please enter your choice: ");
+                    choice2 = scanner.nextLine();
+                    break;
+
+                case "seller":
+                    System.out.println("seller");
+                    //make seller stuff now
+
+                    System.out.println("Seller Interface: ");
+                    System.out.println("================");
+                    System.out.println();
+                    System.out.println("1. Browse all products");
+                    System.out.println("2. Search for product");
+                    System.out.println("3. Add to cart");
+                    System.out.println("4. Sell product");
+                    System.out.println("5. Delete listing");
+                    System.out.println("6. View own listings");
+                    System.out.println("7. Sign Out");
+                    System.out.println();
+                    System.out.println("Please enter your choice: ");
+                    choice2 = scanner.nextLine();
+                    break;
+            
+                default:
+                    break;
+            }
         }
 
     }
