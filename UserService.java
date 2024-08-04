@@ -7,12 +7,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserService {
-
     public static void main(String[] args) {
 
         ArrayList<Items> cart = new ArrayList<Items>();
 
         String role = "buyer";
+
+        String chosenCat = "";
 
         int userIndex = 0;
 
@@ -48,8 +49,6 @@ public class UserService {
 
                 Products.add(new Items(itemName, itemSku, itemPrice, itemDesc, itemCat, userListed));
             }
-
-            System.out.println(Products.get(1));
 
         } catch (Exception e) {
             System.out.println("Unable to establish a connection - "+e);
@@ -331,12 +330,67 @@ public class UserService {
                                     }
                                     break;
                                 case "2":
+                                    System.out.println("");
+                                    System.out.println("Which Category? ");
                                     System.out.println();
-                                    System.out.println("Search by category: ");
-                                    search = scanner.nextLine();
+                                    System.out.println("1. GPUs");
+                                    System.out.println("2. Memory");
+                                    System.out.println("3. Storage");
+                                    System.out.println("4. Motherboards");
+                                    System.out.println("5. Cooling");
+                                    System.out.println("6. PSUs");
+                                    System.out.println("7. Monitors");
+                                    System.out.println("8. Networking");
+                                    System.out.println("9. Laptops");
+                                    System.out.println("10. Peripherals");
+                                    System.out.println("11. Cases");
+                                    System.out.println("12. Accessories");
+                                    System.out.println();
+                                    String choice5 = scanner.nextLine();
+                                    switch (choice5) {
+                                        case "1":
+                                            chosenCat = "GPUs";
+                                            break;
+                                        case "2":
+                                            chosenCat = "Memory";
+                                            break;
+                                        case "3":
+                                            chosenCat = "Storage";
+                                            break;
+                                        case "4":
+                                            chosenCat = "Motherboards";
+                                            break;
+                                        case "5":
+                                            chosenCat = "Cooling";
+                                            break;
+                                        case "6":
+                                            chosenCat = "PSUs";
+                                            break;
+                                        case "7":
+                                            chosenCat = "Monitors";
+                                            break;
+                                        case "8":
+                                            chosenCat = "Networking";
+                                            break;
+                                        case "9":
+                                            chosenCat = "Laptops";
+                                            break;
+                                        case "10":
+                                            chosenCat = "Peripherals";
+                                            break;
+                                        case "11":
+                                            chosenCat = "Cases";
+                                            break;
+                                        case "12":
+                                            chosenCat = "Accessories";
+                                            break;
+                                        default:
+                                            System.err.println("Invalid Choice... Please try again.");
+                                            break;
+                                    }
                                     System.out.println("---------------------------------------------------------------------------");
                                     for (int i = 0; i < Products.size(); i++) {
-                                        if(Products.get(i).itemCat.toLowerCase().indexOf(search.toLowerCase()) != -1){
+                                        if(Products.get(i).itemCat.equals(chosenCat)){
                                             System.out.println(Products.get(i));
                                             System.out.println("---------------------------------------------------------------------------");
                                         }
