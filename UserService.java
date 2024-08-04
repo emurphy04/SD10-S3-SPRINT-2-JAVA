@@ -6,20 +6,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javax.sound.sampled.Port;
-
-
 public class UserService {
-
-    public void addItem(){
-
-    }
-
-
 
     public static void main(String[] args) {
 
-        
+        ArrayList<Items> cart = new ArrayList<Items>();
 
         String role = "buyer";
 
@@ -184,6 +175,21 @@ public class UserService {
                     }
                     System.out.println("User created! Please login");
                     isLogged = true;
+                    switch (role) {
+                        case "admin":
+                            users.add(new Admin(userEnteredUsername, userEnteredPassword, userEnteredEmail));
+                            break;
+                        case "buyer":
+                            users.add(new Buyer(userEnteredUsername, userEnteredPassword, userEnteredEmail));
+                            break;
+                        case "seller":
+                            users.add(new Seller(userEnteredUsername, userEnteredPassword, userEnteredEmail));
+                            break;
+                    
+                        default:
+                            break;
+                    }
+                    userIndex = users.size()-1;
                     break;
                 default:
                     System.out.println("Invalid Choice, Please try again.");
@@ -194,6 +200,7 @@ public class UserService {
         //CLI
         boolean signout = false;
         while(signout == false){
+            User user = users.get(userIndex);
             switch (users.get(userIndex).getRole()) {
                 case "admin":
                     //make admin stuff now
@@ -280,7 +287,6 @@ public class UserService {
                     break;
 
                 case "buyer":
-                    System.out.println("buyer");
                     //made buyer stuff now
 
                     System.out.println("Customer Interface: ");
@@ -288,11 +294,114 @@ public class UserService {
                     System.out.println();
                     System.out.println("1. Browse all products");
                     System.out.println("2. Search for product");
-                    System.out.println("3. Add to cart");
-                    System.out.println("4. Sign Out");
+                    System.out.println("3. Add sku to cart");
+                    System.out.println("4. Checkout");
+                    System.out.println("5. Sign Out");
                     System.out.println();
                     System.out.println("Please enter your choice: ");
                     choice2 = scanner.nextLine();
+
+                    switch (choice2) {
+                        case "1":
+                            System.out.println("---------------------------------------------------------------------------");
+                            for(int i = 0; i<Products.size(); i++){
+                                System.out.println(Products.get(i));
+                                System.out.println("---------------------------------------------------------------------------");
+                            }
+                            break;
+                        case "2":
+                            System.out.println("---------------------------------------------------------------------------");
+                            System.out.println("Search by:");
+                            System.out.println("1. Name");
+                            System.out.println("2. Category");
+                            System.out.println("3. Seller");
+                            String choice3 = scanner.nextLine();
+
+                            switch (choice3) {
+                                case "1":
+                                    System.out.println();
+                                    System.out.println("Search by name: ");
+                                    String search = scanner.nextLine();
+                                    System.out.println("---------------------------------------------------------------------------");
+                                    for (int i = 0; i < Products.size(); i++) {
+                                        if(Products.get(i).itemName.toLowerCase().indexOf(search.toLowerCase()) != -1){
+                                            System.out.println(Products.get(i));
+                                            System.out.println("---------------------------------------------------------------------------");
+                                        }
+                                    }
+                                    break;
+                                case "2":
+                                    System.out.println();
+                                    System.out.println("Search by category: ");
+                                    search = scanner.nextLine();
+                                    System.out.println("---------------------------------------------------------------------------");
+                                    for (int i = 0; i < Products.size(); i++) {
+                                        if(Products.get(i).itemCat.toLowerCase().indexOf(search.toLowerCase()) != -1){
+                                            System.out.println(Products.get(i));
+                                            System.out.println("---------------------------------------------------------------------------");
+                                        }
+                                    }
+                                    break;
+                                case "3":
+                                    System.out.println();
+                                    System.out.println("Search by seller: ");
+                                    search = scanner.nextLine();
+                                    System.out.println("---------------------------------------------------------------------------");
+                                    for (int i = 0; i < Products.size(); i++) {
+                                        if(Products.get(i).userListed.toLowerCase().indexOf(search.toLowerCase()) != -1){
+                                            System.out.println(Products.get(i));
+                                            System.out.println("---------------------------------------------------------------------------");
+                                        }
+                                    }
+                                    break;
+                            
+                                default:
+                                    break;
+                            }
+                            break;
+                        case "3":
+                            boolean cartLoop = true;
+                            while(cartLoop){
+                                System.out.println();
+                                System.out.println("Enter the sku you would like to add to your cart:");
+                                System.out.println();
+                                String sku = scanner.nextLine();
+                                for (int i = 0; i < Products.size(); i++) {
+                                    if(Products.get(i).itemSku.toLowerCase().equals(sku.toLowerCase())){
+                                        user.addToCart(Products.get(i));
+                                        System.out.println("Product added");
+                                    }
+                                }
+                                System.out.println();
+                                System.out.println("Would you like to add another item? Y/N");
+                                String choice4 = scanner.nextLine().toLowerCase();
+                                if (choice4.equals("n")){
+                                    cartLoop = false;
+                                }
+                            }
+                                break;
+                        case "4":
+                            double price = 0;
+                            System.out.println("---------------------------------------------------------------------------");
+                            System.out.println(user.username+"'s cart:");
+                            System.out.println();
+                            System.out.println("---------------------------------------------------------------------------");
+                            for (int i = 0; i < user.cart.size(); i++) {
+                                System.out.println(user.cart.get(i));
+                                price = price+user.cart.get(i).itemPrice;
+                                System.out.println("---------------------------------------------------------------------------");
+                            }
+                            System.out.println("Total Cost: $"+price);
+                            break;
+                        case "5":
+                            System.out.println("Exiting...");
+                            signout = true;
+                            break;
+
+                        default:
+                            break;
+                    }
+
                     break;
 
                 case "seller":
@@ -318,6 +427,5 @@ public class UserService {
                     break;
             }
         }
-
     }
 }
