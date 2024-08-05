@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class UserService {
     public static void main(String[] args) {
@@ -65,58 +66,6 @@ public class UserService {
 
         while(isLogged == false){
             switch (choice) {
-                case "1":
-                    //login
-                    try {
-                        Class.forName("org.postgresql.Driver");
-            
-                        String sql = "select * from users";
-                        String url = "jdbc:postgresql://localhost:5432/Java";
-                        String username = "postgres";
-                        String password = "admin";
-            
-                        Connection connection = DriverManager.getConnection(url, username, password);
-                        Statement statement = connection.createStatement();
-                        ResultSet rs = statement.executeQuery(sql);
-            
-                        while (rs.next()){
-                            String user = rs.getString(1);
-                            String pass = rs.getString(2);
-                            String email = rs.getString(3);
-                            String userrole = rs.getString(4);
-
-                            switch (userrole) {
-                                case "admin" -> users.add(new Admin(user, pass, email));
-                                case "buyer" -> users.add(new Buyer(user, pass, email));
-                                case "seller" -> users.add(new Seller(user, pass, email));
-                            }
-                        }
-            
-                    } catch (Exception e) {
-                        System.out.println("Unable to establish a connection - "+e);
-                    }
-
-                    System.out.println("Enter your username: ");
-                    String userUsername = scanner.nextLine();
-                    System.out.println("Enter your password: ");
-                    String userPassword = scanner.nextLine();
-
-                    for(int i = 0; i<users.size(); i++){
-                        if (userUsername.equals(users.get(i).username)){
-                            if (userPassword.equals(users.get(i).password)){
-                                isLogged = true;
-                                userIndex = i;
-                            }
-                        }
-                    }
-
-                    if (isLogged == false){
-                        System.out.println("Username or password is incorrect.");
-                        System.out.println();
-                    }
-
-                    break;
-
                 case "2":
                     //sign up
 
@@ -156,6 +105,8 @@ public class UserService {
                     System.out.println("Please enter a password: ");
                     String userEnteredPassword = scanner.nextLine();
                     System.out.println();
+
+                    String hashedPass = BCrypt.hashpw(userEnteredPassword, BCrypt.gensalt());
 
                     System.out.println("Please enter a email: ");
                     String userEnteredEmail = scanner.nextLine();
@@ -199,7 +150,7 @@ public class UserService {
 
                         PreparedStatement st = connection.prepareStatement("INSERT INTO users (username, password, email, role) VALUES (?, ?, ?, ?)");
                         st.setString(1, userEnteredUsername);
-                        st.setString(2, userEnteredPassword);
+                        st.setString(2, hashedPass);
                         st.setString(3, userEnteredEmail);
                         st.setString(4, role);
                         st.executeUpdate();
@@ -225,6 +176,57 @@ public class UserService {
                             break;
                     }
                     userIndex = users.size()-1;
+                    break;
+                    case "1":
+                    //login
+                    try {
+                        Class.forName("org.postgresql.Driver");
+            
+                        String sql = "select * from users";
+                        String url = "jdbc:postgresql://localhost:5432/Java";
+                        String username = "postgres";
+                        String password = "admin";
+            
+                        Connection connection = DriverManager.getConnection(url, username, password);
+                        Statement statement = connection.createStatement();
+                        ResultSet rs = statement.executeQuery(sql);
+            
+                        while (rs.next()){
+                            String user = rs.getString(1);
+                            String pass = rs.getString(2);
+                            String email = rs.getString(3);
+                            String userrole = rs.getString(4);
+
+                            switch (userrole) {
+                                case "admin" -> users.add(new Admin(user, pass, email));
+                                case "buyer" -> users.add(new Buyer(user, pass, email));
+                                case "seller" -> users.add(new Seller(user, pass, email));
+                            }
+                        }
+            
+                    } catch (Exception e) {
+                        System.out.println("Unable to establish a connection - "+e);
+                    }
+
+                    System.out.println("Enter your username: ");
+                    String userUsername = scanner.nextLine();
+                    System.out.println("Enter your password: ");
+                    String userPassword = scanner.nextLine();
+
+                    for(int i = 0; i<users.size(); i++){
+                        if (userUsername.equals(users.get(i).username)){
+                            if (BCrypt.checkpw(userPassword, users.get(i).password)){
+                                isLogged = true;
+                                userIndex = i;
+                            }
+                        }
+                    }
+
+                    if (isLogged == false){
+                        System.out.println("Username or password is incorrect.");
+                        System.out.println();
+                    }
+
                     break;
                 default:
                     System.out.println("Invalid Choice, Please try again.");
