@@ -19,9 +19,11 @@ This CLI system allows users to purchase and or sell items and allows admins to 
 
 ## Required Dependencies
 
-Requires PostgreSQL and JDBC-PostgreSQL
+Requires PostgreSQL, jBCrypt and JDBC-PostgreSQL
 
 pgJDBC - https://jdbc.postgresql.org/download/postgresql-42.7.3.jar
+
+jBCrypt - 
 
 ## Documentation
 - For detailed System Documentation, see ADD LINK HERE
