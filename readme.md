@@ -30,7 +30,7 @@ jBCrypt - https://github.com/emurphy04/SD10-S3-SPRINT-2-JAVA/tree/main/dependenc
 - For detailed System Documentation, see ADD LINK HERE
 
 ## UML Class Diagram
-ADD DIAGRAM
+DIAGRAM - https://github.com/emurphy04/SD10-S3-SPRINT-2-JAVA/blob/main/diagrams/j-diagram.png
 
 ## Video Demonstration
 [Link to video demonstration] -- >> ADD LINK TO VIEW DEMO
