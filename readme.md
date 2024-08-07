@@ -1,29 +1,33 @@
-# Library Management System
+# Computer Parts Commerce CLI
 SD10 - Contributors: Ethan Murphy, Brenda Armstrong
 
 ## Overview
-This Library Management System is a Java-based application designed to manage library resources efficiently. It allows librarians to handle books, periodicals, authors, and patrons, as well as manage borrowing and returning processes.
+This CLI system allows users to purchase and or sell items and allows admins to manage the listings and users.
 
 ## Features
-- Manage library items (books and periodicals)
-- Add, edit, and remove authors
-- Manage patrons 
-- Search for items by title, author, or ISBN
-- Borrow and return library items
-- Support for different types of books (printed, electronic, audio) and periodicals
+- Manage user added items
+- Add items for sale
+- Purchase items from other sellers
+- Searching for items via a name or category
+- Categorized item listings
 
 ## Setup Instructions
 1. Ensure you have Java Development Kit (JDK) 11 or higher installed.
-2. Clone this repository: [https://github.com/emurphy04/SD10-S3-SPRINT-1/]
-3. Navigate to the JAVA directory: cd SD10-S3-SPRINT-1/JAVA
-4. Compile and Run: To compile your Java code, you can use the VS Code integrated terminal. Open the terminal within VS Code by selecting "Terminal" > "New Terminal" from the menu. Then, navigate to the directory containing your Java files and use the javac command to compile them. You can also use the built-in "Run" and "Debug" features of VS Code to compile and execute your Java code menu.
-5. Run the Demo Class to start the application from Demo.java
+2. Clone this repository
+3. Compile and Run: To compile your Java code, you can use the VS Code integrated terminal. Open the terminal within VS Code by selecting "Terminal" > "New Terminal" from the menu. Then, navigate to the directory containing your Java files and use the javac command to compile them. You can also use the built-in "Run" and "Debug" features of VS Code to compile and execute your Java code menu.
+4. Run the User Service Class to start the application from UserService.java
+
+## Required Dependencies
+
+Requires PostgreSQL and JDBC-PostgreSQL
+
+pgJDBC - https://jdbc.postgresql.org/download/postgresql-42.7.3.jar
 
 ## Documentation
-- For detailed System Documentation, see [SYSTEMDOCUMENTATION.PDF](https://github.com/emurphy04/SD10-S3-SPRINT-1/blob/main/JAVA/JavaDocs/SYSTEMDOCUMENTATION.PDF)
+- For detailed System Documentation, see ADD LINK HERE
 
 ## UML Class Diagram
-[UML Class Diagram](https://github.com/emurphy04/SD10-S3-SPRINT-1/blob/main/JAVA/JavaDocs/library_management_system_uml_final.png)
+ADD DIAGRAM
 
 ## Video Demonstration
 [Link to video demonstration] -- >> ADD LINK TO VIEW DEMO
