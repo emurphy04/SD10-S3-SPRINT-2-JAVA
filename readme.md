@@ -23,7 +23,7 @@ Requires PostgreSQL, jBCrypt and JDBC-PostgreSQL
 
 pgJDBC - https://jdbc.postgresql.org/download/postgresql-42.7.3.jar
 
-jBCrypt - 
+jBCrypt - https://github.com/emurphy04/SD10-S3-SPRINT-2-JAVA/blob/main/dependencies/jbcrypt-0.4.jar
 
 ## Documentation
 - For detailed System Documentation, see ADD LINK HERE
