@@ -1,4 +1,4 @@
-# E-Commerce Java-Console Based E-Commerce Platform
+# Java-Console Based E-Commerce Platform
 SD10 - Contributors: Ethan Murphy, Brenda Armstrong
 
 ## Overview
