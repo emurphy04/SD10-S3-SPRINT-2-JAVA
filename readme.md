@@ -2,7 +2,7 @@
 SD10 - Contributors: Ethan Murphy, Brenda Armstrong
 
 ## Overview
-This CLI system allows users to purchase and or sell Computer Parts (items) and allows admins to manage the listings and users.
+This is an E-Commerce Computer Parts Buy/Sell platform using Java and PostgreSQL. This project is designed to simulate a real-world online marketplace where users can register as buyers or sellers, list computer products for sale, and browse available computer products. The admin can manage users and listings.
 
 ## Features
 - Manage user added items
