@@ -1,8 +1,8 @@
-# Computer Parts Commerce CLI
+# E-Commerce Java-Console Based E-Commerce Platform
 SD10 - Contributors: Ethan Murphy, Brenda Armstrong
 
 ## Overview
-This is an E-Commerce Computer Parts Buy/Sell platform using Java and PostgreSQL. This project is designed to simulate a real-world online marketplace where users can register as buyers or sellers, list computer products for sale, and browse available computer products. The admin can manage users and listings.
+This is an Computer Parts E-Commerce Buy/Sell Platform  using Java and PostgreSQL. This project is designed to simulate a real-world online marketplace where users can register as buyers or sellers, list computer products for sale, and browse available computer products. The admin can manage users and listings.
 
 ## Features
 - Manage user added items
