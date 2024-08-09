@@ -2,7 +2,7 @@
 SD10 - Contributors: Ethan Murphy, Brenda Armstrong
 
 ## Overview
-This CLI system allows users to purchase and or sell items and allows admins to manage the listings and users.
+This CLI system allows users to purchase and or sell Computer Parts (items) and allows admins to manage the product items, listings and users.
 
 ## Features
 - Manage user added items
