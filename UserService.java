@@ -270,6 +270,7 @@ public class UserService {
                             System.out.println("Please enter the username of the user to be deleted: ");
                             String delUser = scanner.nextLine();
                             if(!(users.get(userIndex).username.equals(delUser))){
+                                String currUser = users.get(userIndex).username;
                                 for(int i = 0; i<users.size(); i++){
                                     if(users.get(i).username.equals(delUser)){
                                         System.out.println("Are you sure you want to delete this user? Y/N");
@@ -289,6 +290,7 @@ public class UserService {
                                                 st.setString(1, delUser);
                                                 st.executeUpdate();
                                                 st.close();
+                                                userIndex = userIndex-1;
                                     
                                             } catch (Exception e) {
                                                 System.out.println("Unable to establish a connection - "+e);
