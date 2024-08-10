@@ -119,7 +119,7 @@ Main class that handles user interactions and business logic.
 
 ### 2.2 UML Diagrams 
 
-[Include updated UML diagram here]
+[[View UML diagram Here]](https://github.com/emurphy04/SD10-S3-SPRINT-2-JAVA/blob/main/diagrams/j-diagram.png)
 
 ### 2.3 How to Start/Access the Application 
 
