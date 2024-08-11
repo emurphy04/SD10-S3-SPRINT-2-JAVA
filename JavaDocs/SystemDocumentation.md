@@ -1,102 +1,260 @@
-# SD10 Semester 3 Final Contributions Overview
+# Java E-Commerce Platform
+## System Documentation
 
-## Team Members
+Document Version: 1.1.0
+Date: 10/08/2024
 
-- **[Ethan Murphy](https://github.com/emurphy04)** - Lead Developer for Java-Console Based E-Commerce Platform
-- **[Brenda Armstrong](https://github.com/brendaleearmstrong)** - Lead Developer for VinoVault Wine Search Engine
+## Contents 
+1. [Document Management](#1-document-management)
+   1.1 [Contributors](#11-contributors)
+   1.2 [Version Control](#12-version-control)
+2. [User Documentation](#2-user-documentation)
+   2.1 [Classes & Functionality](#21-classes-and-functionality)
+   2.2 [UML Diagrams](#22-uml-diagrams)
+   2.3 [How to Start/Access the Application](#23-how-to-startaccess-the-application)
+3. [Development Documentation](#3-development-documentation)
+   3.1 [Javadoc's](#31-javadocs)
+   3.2 [Source Code Structure](#32-source-code-structure)
+   3.3 [Build Process](#33-build-process)
+   3.4 [Compiler Time Dependencies](#34-compiler-time-dependencies)
+   3.5 [Development Standards](#35-development-standards)
+   3.6 [Setting up the Database for Development](#36-setting-up-the-database-for-development)
+   3.7 [Getting the Source Code from the Repository](#37-getting-the-source-code-from-the-repository)
+4. [Deployment Documentation](#4-deployment-documentation)
+   4.1 [Installation Manual](#41-installation-manual)
+   4.2 [Demonstrating the Project](#42-demonstrating-the-project)
 
-## Overview
+## 1 Document Management 
 
-In the final sprint of Semester 3, our team, consisting of just two developers—Ethan Murphy and Brenda Armstrong—successfully delivered two comprehensive projects: the **Java-Console Based E-Commerce Platform** and the **VinoVault Wine Search Engine**. Despite being a smaller team compared to the standard group size of three, we managed to handle all aspects of project development, from planning to execution and deployment. Our team has been working together since our very 1st sprint of Semember 1 and we have built a robust team strategy through trust, collaboration, and effective project management with each member taking the lead on one project while also providing crucial support on the other.
+This project is a Java application designed to manage users (Admin, Buyer, Seller) and computer parts within an e-commerce platform. The system provides functionalities for user management, role-based access, and detailed management of computer parts (items) including adding, editing, and removing parts. The platform is built using Java and PostgreSQL and is console-based.
 
-### Project Scrum Agile Management
+### 1.1 Contributors 
 
-Given our small team size, we implemented an Agile approach using Scrum principles to manage the project effectively:
+Role | Unit | Name 
+-----|------|------
+Software Development Lead | | Ethan Murphy 
+Technical Writer/Tester | | Brenda Armstrong
 
-- **Daily Stand-ups**: We held every-other-day meetings via Microsoft Teams to discuss progress, address blockers, and plan the day’s tasks. This constant communication ensured that both projects were on track and that any issues were resolved promptly.
-- **GitHub Projects**: We utilized GitHub Projects to manage tasks and track progress. Each project had its own board where tasks were categorized into "BackLog", "To Do," "In Progress," and "Done." This visual workflow allowed us to monitor the status of each feature and ensure timely completion.
-- **Sprint Planning and Retrospective**: At the start of the sprint, we planned the key features and milestones for each project. We conducted a retrospective at the end of the sprint to discuss what went well, what could be improved, and to document lessons learned.
+### 1.2 Version Control 
 
-### Sprint Management and Branching Strategy
+Date | Version | Author | Section | Amendment 
+-----|---------|--------|---------|----------
+09/08/2024 | 1.0.0 | Brenda Armstrong | | Initial Version
+10/08/2024 | 1.1.0 | Brenda Armstrong | All | Updated with improved functionality and code structure
 
-Managing the sprint as a two-person team required efficient collaboration and clear communication. To keep our codebases organized and our workflows efficient, we employed a branching strategy tailored to our needs:
+## 2 User Documentation 
 
-#### Java-Console Based E-Commerce Platform (Ethan Murphy's Project)
+The Computer Parts E-Commerce Platform is a Java-based application designed to manage various computer parts available for purchase. The platform supports different user roles such as Admin, Buyer, and Seller, each with specific capabilities. Users can manage parts (items) by adding new parts, updating existing parts, or removing parts from the inventory. Buyers can browse through available parts, add them to their cart, and make purchases.
 
-**Project Overview**: 
-The **Java-Console Based E-Commerce Platform** is a console-based application designed to simulate a real-world online marketplace where users can register as buyers or sellers, list computer products for sale, and browse available items. The platform includes features for managing user accounts, adding items for sale, purchasing items, and categorizing listings.
+### 2.1 Classes and Functionality
 
-- **Repository**: [SD10-S3-SPRINT-2-JAVA](https://github.com/emurphy04/SD10-S3-SPRINT-2-JAVA)
-- **Branching Strategy**:
-  - The **main branch** (`main`) served as the stable branch where the final code was consolidated.
-  - Feature development was done on separate branches named after the specific feature being worked on (e.g., `Login`, `Seller-CLI`).
-  - Once a feature was completed and tested, it was merged into the `main` branch via pull requests to ensure that the integration was smooth and that the codebase remained stable.
+#### User
+The base class for all user roles in the system. It contains common attributes such as username, password, and email that are shared among all user types (Admin, Buyer, Seller).
 
-**Key Responsibilities**:
+- Attributes: username, password, email, role, cart
+- Methods:
+  - getRole(): Returns the role of the user.
+  - addToCart(Items item): Adds an item to the user's shopping cart.
+  - viewCart(): Displays the user's shopping cart and total price.
+  - getUsername(), getPassword(), getEmail(): Getter methods for user attributes.
+  - setUsername(String), setPassword(String), setEmail(String): Setter methods for user attributes.
 
-- **Ethan Murphy**:
-  - **Backend Development**: Designed and implemented core backend features including user management and item listing functionalities.
-  - **Database Integration**: Integrated PostgreSQL to manage data storage efficiently.
-  - **Documentation**: Authored README file.
-  - **Video Demonstration**: Created a video walkthrough to demonstrate the platform's features.
-  - **UML Class Diagram**: Created the UML Class Diagram to visually represent the system's architecture.  
-  - **Branching Strategy**: Managed feature development and bug fixes on separate branches before merging them into the `main` branch, ensuring the stability of the codebase.
+#### Admin
+Represents an administrator with capabilities to manage the platform's overall settings and users.
 
-- **Brenda Armstrong**:
-  - **Testing**: Conducted extensive testing to ensure the application functioned as expected and was free of critical bugs.
-  - **Support Development**: Assisted in refining backend services and contributed to the implementation of key features.
-  - **Documentation **: Led documentation efforts for System Documentation and Sprint Team Over Readme.md files.
+- Attributes: Inherits from User
+- Methods:
+  - getRole(): Returns "admin" as the user's role.
 
-#### VinoVault Wine Search Engine (Brenda Armstrong's Project)
+#### Buyer
+Represents a user who can browse, select, and purchase computer parts from the platform.
 
-**Project Overview**: 
-**VinoVault** is a full-stack web application that serves as a comprehensive wine search engine, allowing users to search for wines across multiple databases. It provides a rich and interactive experience for wine enthusiasts, featuring user authentication, a personal wine vault, and advanced search capabilities.
+- Attributes: Inherits from User
+- Methods:
+  - getRole(): Returns "buyer" as the user's role.
 
-- **Repository**: [S3-fsjs-finalsprint-vinovault](https://github.com/brendaleearmstrong/S3-fsjs-finalsprint-vinovault)
-- **Branching Strategy**:
-  - The **main branch** (`main`) was used as the stable branch that reflected the most up-to-date and tested version of the project.
-  - New features and testing were developed on separate branches based upon Sprint Requirements (e.g., `phase-3-/DDL`, `phaase-10-iterate`).
-  - Upon completion and testing, these feature branches were merged back into the `main` branch via pull requests, ensuring that only stable and fully reviewed code was included.
+#### Seller
+Represents a user who can list computer parts for sale on the platform.
 
-**Key Responsibilities**:
+- Attributes: Inherits from User
+- Methods:
+  - getRole(): Returns "seller" as the user's role.
 
-- **Brenda Armstrong**:
-  - **Full-Stack Development**: Led the branding, design, development and implementation of both frontend and backend components, ensuring seamless database integration. 
-  - **Database Management**: Set up and managed PostgreSQL and MongoDB databases, facilitating complex queries for Search, data management with mock data generated through ClaudeAI and ChatGPT.
-  - **Feature Implementation**: Developed critical features including user authentication, JWT, EventLogging, 'extra' Vault bonus feature, and advanced search functionality (FullText and Filtered).
-  - **Testing and Debugging**: Conducted extensive testing to ensure robustness, fixing issues promptly.
-  - **Documentation**: Authored VinoVault readme.md and Sprint Team Overview.md Documentation
-  - **Branching Strategy**: Utilized feature branches for development, merging stable code into the `main` branch through pull requests to maintain a clean and functional codebase.
+#### Items
+Represents a computer part available in the inventory.
 
-- **Ethan Murphy**:
-  - **Testing**: Provided critical testing support to ensure that the VinoVault platform was functional and user-friendly.
-  - **Support Development**: Assisted with the refinement of backend services and contributed to the successful deployment of the platform.
-  - **Video Demonstration**: Created a video walkthrough to demonstrate the VinoVaults features.  
-  - **Documentation Assistance**: Contributed to the project documentation by providing additional insights and ensuring clarity.
+- Attributes: itemName, itemSku, itemPrice, itemDesc, itemCat, userListed
+- Methods:
+  - Getter and setter methods for all attributes
+  - toString(): Returns a formatted string representation of the item
 
-## Technologies Used
+#### ItemDAO
+Data Access Object for managing Items in the database.
 
-- **Languages**: Java, JavaScript, HTML, CSS
-- **Frameworks/Libraries**: 
-  - Backend: Node.js, Express
-  - Frontend: Ejs
-- **Databases**: PostgreSQL, MongoDB
-- **AI Assistance**: ChatGPT, ClaudeAI
-- **Tools**: Git, GitHub, Microsoft Teams
-- **Methodologies**: Agile, Scrum
+- Methods:
+  - getAllItems(): Retrieves all items from the database.
+  - addItem(Items item): Adds a new item to the database.
+  - deleteItem(String sku): Removes an item from the database.
+  - searchItems(String searchTerm, String category): Searches for items based on name or category.
 
-## Outcomes
+#### UserDAO
+Data Access Object for managing Users in the database.
 
-Our sprint resulted in:
-- Two functional applications
-- Improved full-stack development skills
-- Enhanced Agile practices in a small team setting
-- Strengthened problem-solving and time management abilities
+- Methods:
+  - getAllUsers(): Retrieves all users from the database.
+  - addUser(User user): Adds a new user to the database.
+  - deleteUser(String username): Removes a user from the database.
 
-### Conclusion
+#### UserService
+Main class that handles user interactions and business logic.
 
-Despite the challenges of working in a smaller team, we were able to successfully manage and deliver two high-quality projects by leveraging effective Scrum-based project management, a robust branching strategy, and strong collaboration. By working together and supporting each other's projects, we ensured that both the Java-Console Based E-Commerce Platform and VinoVault Wine Search Engine were completed to a high standard. The experience gained from this sprint has significantly enhanced our skills in full-stack development, project management, and teamwork, preparing us for future professional challenges.
+- Methods:
+  - main(String[] args): Entry point of the application.
+  - login(): Handles user login.
+  - signUp(): Handles user registration.
+  - handleUserSession(User user): Manages user sessions based on role.
+  - handleAdminSession(Admin admin): Manages admin-specific operations.
+  - handleBuyerSession(Buyer buyer): Manages buyer-specific operations.
+  - handleSellerSession(Seller seller): Manages seller-specific operations.
 
----
+### 2.2 UML Diagrams 
 
-*This readme summarizes the work of Ethan Murphy and Brenda Armstrong in SD10 Semester 3.*
+[[View UML diagram Here]](https://github.com/emurphy04/SD10-S3-SPRINT-2-JAVA/blob/main/diagrams/j-diagram.png)
+
+### 2.3 How to Start/Access the Application 
+
+1. Install JDK: Ensure that JDK 11 or higher is installed on your system.
+2. Clone Repository: Clone the project repository using Git.
+3. Install Dependencies: Download and include the PostgreSQL JDBC driver and jBCrypt in your project.
+   - pgJDBC: Download from [PostgreSQL JDBC Driver](https://jdbc.postgresql.org/download/postgresql-42.7.3.jar)
+   - jBCrypt: Available in the dependencies directory of the project.
+4. Set up Database: Follow the instructions in section 3.6 to set up the PostgreSQL database.
+5. Configure Database Connection: Update the JDBC_URL, JDBC_USER, and JDBC_PASSWORD in ItemDAO.java and UserDAO.java to match your PostgreSQL setup.
+6. Compile and Run: Use VS Code or your preferred IDE to compile the project:
+   - Open the terminal in VS Code (Terminal > New Terminal).
+   - Navigate to the directory containing your Java files.
+   - Compile: `javac *.java`
+   - Run: `java UserService`
+
+## 3 Development Documentation 
+
+### 3.1 JavaDoc
+
+JavaDoc comments are provided for all classes and methods to document their functionality and usage. To generate JavaDoc documentation:
+
+1. Navigate to the project root directory in the terminal.
+2. Run the command: `javadoc -d doc *.java`
+3. Open the generated `index.html` file in the `doc` folder to view the documentation.
+
+### 3.2 Source Code Structure
+
+All Java source files are organized in a single directory. Each class is defined in its own .java file:
+
+- User.java
+- Admin.java
+- Buyer.java
+- Seller.java
+- Items.java
+- ItemDAO.java
+- UserDAO.java
+- UserService.java
+
+### 3.3 Build Process
+
+Compile the project using a Java compiler:
+
+```
+javac *.java
+```
+
+You can also use the built-in "Run" and "Debug" features of VS Code to compile and execute the main method of the UserService class.
+
+### 3.4 Compiler Time Dependencies
+
+Add these dependencies to your project to compile successfully:
+
+- pgJDBC: PostgreSQL JDBC driver.
+- jBCrypt: A library for hashing passwords securely.
+
+Ensure these JAR files are in your classpath when compiling and running the application.
+
+### 3.5 Development Standards
+
+The project follows standard Java coding conventions and best practices:
+
+- Classes start with an uppercase letter and use CamelCase (e.g., UserService).
+- Methods and variables start with a lowercase letter and use camelCase (e.g., addToCart).
+- Constants are in all uppercase with underscores (e.g., JDBC_URL).
+- Use meaningful and descriptive names for classes, methods, and variables.
+- Include comments for complex logic or non-obvious code sections.
+- Use proper indentation and formatting for improved readability.
+
+### 3.6 Setting up the Database for Development
+
+This application uses PostgreSQL for persistent data storage. Follow these steps to set up the database:
+
+1. Install PostgreSQL on your development machine.
+2. Create a new database named "Java".
+3. Use the provided SQL scripts to create the necessary tables:
+   - Run `usersCreate.sql` to create the users table.
+   - Run `prodsCreate.sql` to create the products table.
+   - (Optional) Run `prodsInsert.sql` to populate the products table with sample data.
+
+Database Schema:
+
+- Users Table
+  - username (text, primary key)
+  - password (text)
+  - email (text)
+  - role (text)
+
+- Products Table
+  - itemname (text)
+  - itemsku (text, primary key)
+  - itemprice (double precision)
+  - itemdesc (text)
+  - itemcat (text)
+  - userListed (text)
+
+### 3.7 Getting the Source Code from the Repository
+
+To clone the repository:
+
+```
+git clone https://github.com/emurphy04/SD10-S3-SPRINT-2-JAVA
+cd SD10-S3-SPRINT-2/JAVA
+```
+
+## 4 Deployment Documentation 
+
+### 4.1 Installation Manual
+
+To deploy the application:
+
+1. Java Runtime Environment (JRE): Ensure that JRE 11 or higher is installed on the target system.
+2. PostgreSQL: Install and configure PostgreSQL on the target system.
+3. Database Configuration: 
+   - Create a new database named "Java".
+   - Import the SQL schema using the provided SQL scripts (usersCreate.sql and prodsCreate.sql).
+4. Application Files:
+   - Copy all compiled .class files to the deployment directory.
+   - Include the required JAR files (PostgreSQL JDBC driver and jBCrypt) in the deployment directory.
+5. Configuration:
+   - Update the database connection details in ItemDAO.java and UserDAO.java if necessary.
+
+### 4.2 Demonstrating the Project
+
+To run the application:
+
+1. Open a terminal or command prompt.
+2. Navigate to the directory containing the compiled .class files and JAR dependencies.
+3. Run the command: `java -cp .:postgresql-42.7.3.jar:jbcrypt-0.4.jar UserService`
+   (Use `;` instead of `:` as a separator on Windows)
+4. Follow the on-screen prompts to interact with the system. 
+5. Use the following steps to demonstrate key features:
+   - Register a new user (buyer or seller)
+   - Log in as an admin to manage users and view all products
+   - Log in as a seller to add new product listings
+   - Log in as a buyer to search for products, add items to cart, and checkout
+
+This completes the system documentation for the Java E-Commerce Platform. For any further questions or support, please contact the development team.
