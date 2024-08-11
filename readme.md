@@ -27,13 +27,13 @@ pgJDBC - https://jdbc.postgresql.org/download/postgresql-42.7.3.jar
 jBCrypt - https://github.com/emurphy04/SD10-S3-SPRINT-2-JAVA/tree/main/dependencies
 
 ## Documentation
-- For detailed System Documentation, [View System Documentation.MD](https://github.com/emurphy04/SD10-S3-SPRINT-2-JAVA/blob/main/JavaDocs/SystemDocumentation.md)
+- For detailed System Documentation, see ADD LINK HERE
 
 ## UML Class Diagram
 DIAGRAM - https://github.com/emurphy04/SD10-S3-SPRINT-2-JAVA/blob/main/diagrams/j-diagram.png
 
 ## Video Demonstration
-Video submitted via Teams assignment console
+[Link to video demonstration] -- >> ADD LINK TO VIEW DEMO
 
 ## License
 This project is licensed under the MIT License.

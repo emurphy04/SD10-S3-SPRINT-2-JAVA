@@ -20,40 +20,15 @@ public class UserService {
 
         boolean isLogged = false;
 
-        ArrayList<Items> Products = new ArrayList<Items>();
+        ItemDAO.getItems();
 
-        ArrayList<User> users = new ArrayList<User>();
+        ArrayList<Items> Products = ItemDAO.Products;
+
+        UserDAO.getUsers();
+
+        ArrayList<User> users = UserDAO.users;
 
         Scanner scanner = new Scanner(System.in);
-
-        //JDBC code
-
-        try {
-            Class.forName("org.postgresql.Driver");
-
-            String sql = "select * from products";
-            String url = "jdbc:postgresql://localhost:5432/Java";
-            String username = "postgres";
-            String password = "admin";
-
-            Connection connection = DriverManager.getConnection(url, username, password);
-            Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(sql);
-
-            while (rs.next()){
-                String itemName = rs.getString(1);
-                String itemSku = rs.getString(2);
-                double itemPrice = rs.getDouble(3);
-                String itemDesc = rs.getString(4);
-                String itemCat = rs.getString(5);
-                String userListed = rs.getString(6);
-
-                Products.add(new Items(itemName, itemSku, itemPrice, itemDesc, itemCat, userListed));
-            }
-
-        } catch (Exception e) {
-            System.out.println("Unable to establish a connection - "+e);
-        }
 
         //LOGIN/REGISTER
 
@@ -68,35 +43,6 @@ public class UserService {
             switch (choice) {
                 case "2":
                     //sign up
-
-                    try {
-                        Class.forName("org.postgresql.Driver");
-            
-                        String sql = "select * from users";
-                        String url = "jdbc:postgresql://localhost:5432/Java";
-                        String username = "postgres";
-                        String password = "admin";
-            
-                        Connection connection = DriverManager.getConnection(url, username, password);
-                        Statement statement = connection.createStatement();
-                        ResultSet rs = statement.executeQuery(sql);
-            
-                        while (rs.next()){
-                            String user = rs.getString(1);
-                            String pass = rs.getString(2);
-                            String email = rs.getString(3);
-                            String userrole = rs.getString(4);
-
-                            switch (userrole) {
-                                case "admin" -> users.add(new Admin(user, pass, email));
-                                case "buyer" -> users.add(new Buyer(user, pass, email));
-                                case "seller" -> users.add(new Seller(user, pass, email));
-                            }
-                        }
-            
-                    } catch (Exception e) {
-                        System.out.println("Unable to establish a connection - "+e);
-                    }
 
                     System.out.println("Please enter a username: ");
                     String userEnteredUsername = scanner.nextLine();
@@ -139,26 +85,7 @@ public class UserService {
                         }
                     }
 
-                    try {
-                        Class.forName("org.postgresql.Driver");
-            
-                        String url = "jdbc:postgresql://localhost:5432/Java";
-                        String username = "postgres";
-                        String password = "admin";
-            
-                        Connection connection = DriverManager.getConnection(url, username, password);
-
-                        PreparedStatement st = connection.prepareStatement("INSERT INTO users (username, password, email, role) VALUES (?, ?, ?, ?)");
-                        st.setString(1, userEnteredUsername);
-                        st.setString(2, hashedPass);
-                        st.setString(3, userEnteredEmail);
-                        st.setString(4, role);
-                        st.executeUpdate();
-                        st.close();
-            
-                    } catch (Exception e) {
-                        System.out.println("Unable to establish a connection - "+e);
-                    }
+                    UserDAO.createUsers(userEnteredUsername, hashedPass, userEnteredEmail, role);
                     System.out.println("User created! Please login");
                     isLogged = true;
                     switch (role) {
@@ -179,35 +106,6 @@ public class UserService {
                     break;
                     case "1":
                     //login
-                    try {
-                        Class.forName("org.postgresql.Driver");
-            
-                        String sql = "select * from users";
-                        String url = "jdbc:postgresql://localhost:5432/Java";
-                        String username = "postgres";
-                        String password = "admin";
-            
-                        Connection connection = DriverManager.getConnection(url, username, password);
-                        Statement statement = connection.createStatement();
-                        ResultSet rs = statement.executeQuery(sql);
-            
-                        while (rs.next()){
-                            String user = rs.getString(1);
-                            String pass = rs.getString(2);
-                            String email = rs.getString(3);
-                            String userrole = rs.getString(4);
-
-                            switch (userrole) {
-                                case "admin" -> users.add(new Admin(user, pass, email));
-                                case "buyer" -> users.add(new Buyer(user, pass, email));
-                                case "seller" -> users.add(new Seller(user, pass, email));
-                            }
-                        }
-            
-                    } catch (Exception e) {
-                        System.out.println("Unable to establish a connection - "+e);
-                    }
-
                     System.out.println("Enter your username: ");
                     String userUsername = scanner.nextLine();
                     System.out.println("Enter your password: ");
@@ -277,24 +175,8 @@ public class UserService {
                                         String choice3 = scanner.nextLine().toUpperCase();
                                         if (choice3.equals("Y")) {
                                             users.remove(i);
-                                            try {
-                                                Class.forName("org.postgresql.Driver");
-                                    
-                                                String url = "jdbc:postgresql://localhost:5432/Java";
-                                                String username = "postgres";
-                                                String password = "admin";
-                                    
-                                                Connection connection = DriverManager.getConnection(url, username, password);
-                        
-                                                PreparedStatement st = connection.prepareStatement("DELETE FROM users WHERE username=?");
-                                                st.setString(1, delUser);
-                                                st.executeUpdate();
-                                                st.close();
-                                                userIndex = userIndex-1;
-                                    
-                                            } catch (Exception e) {
-                                                System.out.println("Unable to establish a connection - "+e);
-                                            }
+                                            UserDAO.removeUser(delUser);
+                                            userIndex = userIndex-1;
                                         } else {
                                             System.err.println("Delete cancelled.");
                                             break;
@@ -510,9 +392,10 @@ public class UserService {
                     System.out.println("3. Add sku to cart");
                     System.out.println("4. Checkout");
                     System.out.println("5. Add listing");
-                    System.out.println("6. View own listings");
-                    System.out.println("7. Delete Listing");
-                    System.out.println("8. Sign Out");
+                    System.out.println("6. Update listing");
+                    System.out.println("7. View own listings");
+                    System.out.println("8. Delete Listing");
+                    System.out.println("9. Sign Out");
                     System.out.println();
                     System.out.println("Please enter your choice: ");
                     choice2 = scanner.nextLine();
@@ -742,33 +625,141 @@ public class UserService {
                                 break;
                             }
 
-                            try {
-                                Class.forName("org.postgresql.Driver");
-                    
-                                String url = "jdbc:postgresql://localhost:5432/Java";
-                                String username = "postgres";
-                                String password = "admin";
-                    
-                                Connection connection = DriverManager.getConnection(url, username, password);
-        
-                                PreparedStatement st = connection.prepareStatement("INSERT INTO products (itemname, itemsku, itemprice, itemdesc, itemcat, userListed) VALUES (?, ?, ?, ?, ?, ?)");
-                                st.setString(1, userEnteredItemName);
-                                st.setString(2, "C"+(Products.size()+1));
-                                st.setDouble(3, userEnteredItemPrice);
-                                st.setString(4, userEnteredItemDesc);
-                                st.setString(5, chosenCat);
-                                st.setString(6, user.username);
-                                st.executeUpdate();
-                                st.close();
-                                Products.add(new Items(userEnteredItemName, "C"+(Products.size()+1), userEnteredItemPrice, userEnteredItemDesc, chosenCat, user.username));
-                                System.out.println("Item Added!");
-                    
-                            } catch (Exception e) {
-                                System.out.println("Unable to establish a connection - "+e);
-                            }
+                            ItemDAO.addItem(userEnteredItemName, userEnteredItemPrice, userEnteredItemDesc, chosenCat, user.username);
                             break;
 
                         case "6":
+                            System.out.println("What attribute did you want to edit?");
+                            System.out.println("1. Name");
+                            System.out.println("2. Price");
+                            System.out.println("3. Description");
+                            System.out.println("4. Category");
+                            String choice9 = scanner.nextLine();
+                            switch (choice9) {
+                                case "1":
+                                    System.out.println("Enter the SKU of the listing you'd like to edit: ");
+                                    String sku = scanner.nextLine();
+                                    System.out.println("Enter the new name of the listing: ");
+                                    String newname = scanner.nextLine();
+                                    for (int i = 0; i < Products.size(); i++) {
+                                        if (Products.get(i).userListed.equals(user.username)) {
+                                            if (Products.get(i).itemSku.toLowerCase().equals(sku.toLowerCase())) {
+                                                ItemDAO.updateName(newname, sku, i);
+                                                System.out.println("Item Edited.");
+                                            }
+                                        }
+                                    }
+                                    break;
+
+                                case "2":
+                                    System.out.println("Enter the SKU of the listing you'd like to edit: ");
+                                    sku = scanner.nextLine();
+                                    System.out.println("Enter the new price of the listing: ");
+                                    double newprice = scanner.nextDouble();
+                                    scanner.nextLine();
+                                    for (int i = 0; i < Products.size(); i++) {
+                                        if (Products.get(i).userListed.equals(user.username)) {
+                                            if (Products.get(i).itemSku.toLowerCase().equals(sku.toLowerCase())) {
+                                                ItemDAO.updatePrice(newprice, sku, i);
+                                                System.out.println("Item Edited.");
+                                            }
+                                        }
+                                    }
+                                    break;
+
+                                case "3":
+                                    System.out.println("Enter the SKU of the listing you'd like to edit: ");
+                                    sku = scanner.nextLine();
+                                    System.out.println("Enter the new description of the listing: ");
+                                    String newdesc = scanner.nextLine();
+                                    for (int i = 0; i < Products.size(); i++) {
+                                        if (Products.get(i).userListed.equals(user.username)) {
+                                            if (Products.get(i).itemSku.toLowerCase().equals(sku.toLowerCase())) {
+                                                ItemDAO.updateDesc(newdesc, sku, i);
+                                                System.out.println("Item Edited.");
+                                            }
+                                        }
+                                    }
+                                    break;
+
+                                case "4":
+                                    System.out.println("Enter the SKU of the listing you'd like to edit: ");
+                                    sku = scanner.nextLine();
+                                    System.out.println("Enter the new category of the listing: ");
+                                    System.out.println();
+                                    System.out.println("1. GPUs");
+                                    System.out.println("2. Memory");
+                                    System.out.println("3. Storage");
+                                    System.out.println("4. Motherboards");
+                                    System.out.println("5. Cooling");
+                                    System.out.println("6. PSUs");
+                                    System.out.println("7. Monitors");
+                                    System.out.println("8. Networking");
+                                    System.out.println("9. Laptops");
+                                    System.out.println("10. Peripherals");
+                                    System.out.println("11. Cases");
+                                    System.out.println("12. Accessories");
+                                    System.out.println();
+                                    userEnteredItemCat = scanner.nextLine();
+                                            switch (userEnteredItemCat) {
+                                                case "1":
+                                                    chosenCat = "GPUs";
+                                                    break;
+                                                case "2":
+                                                    chosenCat = "Memory";
+                                                    break;
+                                                case "3":
+                                                    chosenCat = "Storage";
+                                                    break;
+                                                case "4":
+                                                    chosenCat = "Motherboards";
+                                                    break;
+                                                case "5":
+                                                    chosenCat = "Cooling";
+                                                    break;
+                                                case "6":
+                                                    chosenCat = "PSUs";
+                                                    break;
+                                                case "7":
+                                                    chosenCat = "Monitors";
+                                                    break;
+                                                case "8":
+                                                    chosenCat = "Networking";
+                                                    break;
+                                                case "9":
+                                                    chosenCat = "Laptops";
+                                                    break;
+                                                case "10":
+                                                    chosenCat = "Peripherals";
+                                                    break;
+                                                case "11":
+                                                    chosenCat = "Cases";
+                                                    break;
+                                                case "12":
+                                                    chosenCat = "Accessories";
+                                                    break;
+                                                default:
+                                                    System.err.println("Invalid Choice... Please try again.");
+                                                    break;
+                                            }
+                                    System.out.println();
+                                    for (int i = 0; i < Products.size(); i++) {
+                                        if (Products.get(i).userListed.equals(user.username)) {
+                                            if (Products.get(i).itemSku.toLowerCase().equals(sku.toLowerCase())) {
+                                                ItemDAO.updateCat(chosenCat, sku, i);
+                                                System.out.println("Item Edited.");
+                                            }
+                                        }
+                                    }
+                                    break;
+                            
+                                default:
+                                    break;
+                            }
+                            
+                            break;
+
+                        case "7":
                             //view listings
                             System.out.println();
                             System.out.println(user.username+"'s listings: ");
@@ -781,7 +772,7 @@ public class UserService {
                             }
                             break;
 
-                        case "7":
+                        case "8":
                             //delete listing
                             System.out.println();
                             System.out.println(user.username+"'s listings: ");
@@ -797,31 +788,15 @@ public class UserService {
                             for (int i = 0; i < Products.size(); i++) {
                                 if (Products.get(i).userListed.equals(user.username)) {
                                     if (Products.get(i).itemSku.toLowerCase().equals(delSku.toLowerCase())) {
-                                        try {
-                                            Class.forName("org.postgresql.Driver");
-                                
-                                            String url = "jdbc:postgresql://localhost:5432/Java";
-                                            String username = "postgres";
-                                            String password = "admin";
-                                
-                                            Connection connection = DriverManager.getConnection(url, username, password);
-                    
-                                            PreparedStatement st = connection.prepareStatement("DELETE FROM products WHERE itemsku=?");
-                                            st.setString(1, delSku.toUpperCase());
-                                            st.executeUpdate();
-                                            st.close();
-                                            Products.remove(i);
-                                            System.out.println("Item Removed.");
-                                
-                                        } catch (Exception e) {
-                                            System.out.println("Unable to establish a connection - "+e);
-                                        }
+                                        ItemDAO.removeItem(delSku);
+                                        Products.remove(i);
+                                        System.out.println("Item Removed.");
                                     }
                                 }
                             }
                             break;
 
-                        case "8":
+                        case "9":
                             System.out.println("Exiting...");
                             signout = true;
                             break;
