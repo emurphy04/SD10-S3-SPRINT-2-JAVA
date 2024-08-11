@@ -87,6 +87,21 @@ Represents a computer part available in the inventory.
 - Methods:
   - Getter and setter methods for all attributes
   - toString(): Returns a formatted string representation of the item
+ 
+#### ItemDAO
+Data Access Object for managing Items in the database.
+- Methods:
+   - getAllItems(): Retrieves all items from the database.
+   - addItem(Items item): Adds a new item to the database.
+   - deleteItem(String sku): Removes an item from the database.
+   - searchItems(String searchTerm, String category): Searches for items based on name or category.
+
+#### UserDAO
+Data Access Object for managing Users in the database.
+- Methods:
+   - getAllUsers(): Retrieves all users from the database.
+   - addUser(User user): Adds a new user to the database.
+   - deleteUser(String username): Removes a user from the database.
 
 #### UserService
 Main class that handles user interactions and business logic.
@@ -138,6 +153,8 @@ All Java source files are organized in a single directory. Each class is defined
 - Buyer.java
 - Seller.java
 - Items.java
+- ItemDAO.java
+- UserDAO.java
 - UserService.java
 
 ### 3.3 Build Process
