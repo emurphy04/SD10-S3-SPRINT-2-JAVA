@@ -138,8 +138,6 @@ All Java source files are organized in a single directory. Each class is defined
 - Buyer.java
 - Seller.java
 - Items.java
-- ItemDAO.java
-- UserDAO.java
 - UserService.java
 
 ### 3.3 Build Process
@@ -223,7 +221,7 @@ To deploy the application:
    - Copy all compiled .class files to the deployment directory.
    - Include the required JAR files (PostgreSQL JDBC driver and jBCrypt) in the deployment directory.
 5. Configuration:
-   - Update the database connection details in ItemDAO.java and UserDAO.java if necessary.
+   - Update the database connection UserService if needed.
 
 ### 4.2 Demonstrating the Project
 
