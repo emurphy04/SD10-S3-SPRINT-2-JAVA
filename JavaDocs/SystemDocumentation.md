@@ -55,7 +55,7 @@ The base class for all user roles in the system. It contains common attributes s
 - Methods:
   - getRole(): Returns the role of the user.
   - addToCart(Items item): Adds an item to the user's shopping cart.
-  - viewCart(): Displays the user's shopping cart and total price.
+  - getCart(): Displays the user's shopping cart and total price.
   - getUsername(), getPassword(), getEmail(): Getter methods for user attributes.
   - setUsername(String), setPassword(String), setEmail(String): Setter methods for user attributes.
 
