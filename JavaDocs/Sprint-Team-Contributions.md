@@ -7,7 +7,7 @@
 
 ## Overview
 
-In the final sprint of Semester 3, our team, consisting of just two developers—Ethan Murphy and Brenda Armstrong—successfully delivered two comprehensive projects: the **Java-Console Based E-Commerce Platform** and the **VinoVault Wine Search Engine**. Despite being a smaller team compared to the standard group size of three, we managed to handle all aspects of project development, from planning to execution and deployment. Our team has been working together since our very 1st sprint of Semember 1 and we have built a robust team strategy through trust, collaboration, and effective project management with each member taking the lead on one project while also providing crucial support on the other.
+In the final sprint of Semester 3, our team, consisting of just two developers—Ethan Murphy and Brenda Armstrong—successfully delivered two comprehensive projects: the **Java-Console Based E-Commerce Platform** and the **VinoVault Wine Search Engine**. Despite being a smaller team compared to the standard group size of three, we managed to handle all aspects of project development, from planning to execution and deployment. Our team has been working together since our very 1st sprint of semester 1 and we have built a robust team strategy through trust, collaboration, and effective project management with each member taking the lead on one project while also providing crucial support on the other.
 
 ### Project Scrum Agile Management
 
