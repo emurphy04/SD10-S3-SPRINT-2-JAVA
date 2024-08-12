@@ -69,7 +69,6 @@ The **Java-Console Based E-Commerce Platform** is a console-based application de
 
 - **Ethan Murphy**:
   - **Testing**: Provided critical testing support to ensure that the VinoVault platform was functional and user-friendly.
-  - **Support Development**: Assisted with the refinement of backend services and contributed to the successful deployment of the platform.
   - **Video Demonstration**: Created a video walkthrough to demonstrate the VinoVaults features.  
   - **Documentation Assistance**: Contributed to the project documentation by providing additional insights and ensuring clarity.
 
