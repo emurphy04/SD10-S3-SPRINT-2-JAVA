@@ -44,7 +44,6 @@ The **Java-Console Based E-Commerce Platform** is a console-based application de
 
 - **Brenda Armstrong**:
   - **Testing**: Conducted extensive testing to ensure the application functioned as expected and was free of critical bugs.
-  - **Support Development**: Assisted in refining backend services and contributed to the implementation of key features.
   - **Documentation **: Led documentation efforts for System Documentation and Sprint Team Over Readme.md files.
 
 #### VinoVault Wine Search Engine (Brenda Armstrong's Project)
