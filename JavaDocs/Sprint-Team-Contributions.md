@@ -99,4 +99,3 @@ Despite the challenges of working in a smaller team, we were able to successfull
 
 *This readme summarizes the work of Ethan Murphy and Brenda Armstrong in SD10 Semester 3.*
 
-Despite the challenges of working in a smaller team, we were able to successfully manage and deliver two high-quality projects by leveraging effective Scrum-based project management, a robust branching strategy, and strong collaboration. By working together and supporting each other's projects, we ensured that both the Java-Console Based E-Commerce Platform and VinoVault Wine Search Engine were completed to a high standard. The experience gained from this sprint has significantly enhanced our skills in full-stack development, project management, and teamwork, preparing us for future professional challenges.
