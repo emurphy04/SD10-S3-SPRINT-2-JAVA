@@ -13,7 +13,7 @@ In the final sprint of Semester 3, our team, consisting of just two developers�
 
 Given our small team size, we implemented an Agile approach using Scrum principles to manage the project effectively:
 
-- **Bi-daily Stand-ups**: We held every-other-day meetings via Microsoft Teams to discuss progress, address blockers, and plan the day’s tasks. This constant communication ensured that both projects were on track and that any issues were resolved promptly.
+- **Daily Stand-ups**: We held every-other-day meetings via Microsoft Teams to discuss progress, address blockers, and plan the day’s tasks. This constant communication ensured that both projects were on track and that any issues were resolved promptly.
 - **GitHub Projects**: We utilized GitHub Projects to manage tasks and track progress. Each project had its own board where tasks were categorized into "BackLog", "To Do," "In Progress," and "Done." This visual workflow allowed us to monitor the status of each feature and ensure timely completion.
 - **Sprint Planning and Retrospective**: At the start of the sprint, we planned the key features and milestones for each project. We conducted a retrospective at the end of the sprint to discuss what went well, what could be improved, and to document lessons learned.
 
@@ -72,6 +72,31 @@ The **Java-Console Based E-Commerce Platform** is a console-based application de
   - **Video Demonstration**: Created a video walkthrough to demonstrate the VinoVaults features.  
   - **Documentation Assistance**: Contributed to the project documentation by providing additional insights and ensuring clarity.
 
+## Technologies Used
+
+- **Languages**: Java, JavaScript, HTML, CSS
+- **Frameworks/Libraries**: 
+  - Backend: Node.js, Express
+  - Frontend: Ejs
+- **Databases**: PostgreSQL, MongoDB
+- **AI Assistance**: ChatGPT, ClaudeAI
+- **Tools**: Git, GitHub, Microsoft Teams
+- **Methodologies**: Agile, Scrum
+
+## Outcomes
+
+Our sprint resulted in:
+- Two functional applications
+- Improved full-stack development skills
+- Enhanced Agile practices in a small team setting
+- Strengthened problem-solving and time management abilities
+
 ### Conclusion
+
+Despite the challenges of working in a smaller team, we were able to successfully manage and deliver two high-quality projects by leveraging effective Scrum-based project management, a robust branching strategy, and strong collaboration. By working together and supporting each other's projects, we ensured that both the Java-Console Based E-Commerce Platform and VinoVault Wine Search Engine were completed to a high standard. The experience gained from this sprint has significantly enhanced our skills in full-stack development, project management, and teamwork, preparing us for future professional challenges.
+
+---
+
+*This readme summarizes the work of Ethan Murphy and Brenda Armstrong in SD10 Semester 3.*
 
 Despite the challenges of working in a smaller team, we were able to successfully manage and deliver two high-quality projects by leveraging effective Scrum-based project management, a robust branching strategy, and strong collaboration. By working together and supporting each other's projects, we ensured that both the Java-Console Based E-Commerce Platform and VinoVault Wine Search Engine were completed to a high standard. The experience gained from this sprint has significantly enhanced our skills in full-stack development, project management, and teamwork, preparing us for future professional challenges.
