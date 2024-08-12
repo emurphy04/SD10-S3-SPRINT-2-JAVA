@@ -13,7 +13,7 @@ In the final sprint of Semester 3, our team, consisting of just two developers�
 
 Given our small team size, we implemented an Agile approach using Scrum principles to manage the project effectively:
 
-- **Daily Stand-ups**: We held every-other-day meetings via Microsoft Teams to discuss progress, address blockers, and plan the day’s tasks. This constant communication ensured that both projects were on track and that any issues were resolved promptly.
+- **Bi-daily Stand-ups**: We held every-other-day meetings via Microsoft Teams to discuss progress, address blockers, and plan the day’s tasks. This constant communication ensured that both projects were on track and that any issues were resolved promptly.
 - **GitHub Projects**: We utilized GitHub Projects to manage tasks and track progress. Each project had its own board where tasks were categorized into "BackLog", "To Do," "In Progress," and "Done." This visual workflow allowed us to monitor the status of each feature and ensure timely completion.
 - **Sprint Planning and Retrospective**: At the start of the sprint, we planned the key features and milestones for each project. We conducted a retrospective at the end of the sprint to discuss what went well, what could be improved, and to document lessons learned.
 
