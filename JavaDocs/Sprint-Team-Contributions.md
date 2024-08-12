@@ -80,7 +80,7 @@ The **Java-Console Based E-Commerce Platform** is a console-based application de
   - Frontend: Ejs
 - **Databases**: PostgreSQL, MongoDB
 - **AI Assistance**: ChatGPT, ClaudeAI
-- **Tools**: Git, GitHub, Microsoft Teams
+- **Tools**: Git, GitHub, Microsoft Teams, Canva
 - **Methodologies**: Agile, Scrum
 
 ## Outcomes
